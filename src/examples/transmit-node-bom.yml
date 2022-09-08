@@ -1,0 +1,19 @@
+description: >
+  An example to transmit an SBOM from a node app. Assumes that there is an `npm run build:bom`
+  command which will build a cyclonedx or spdx bom and place it as `bom.json`
+usage:
+  version: 2.1
+  orbs:
+    manifest: manifest/sbom-transmitter@x.y.z
+
+  jobs:
+    build:
+      docker:
+        - image: cimg/node:lts
+      steps:
+        - checkout
+        - run: npm ci
+        - run: npm run build:bom
+        - manifest/transmit:
+            bomFilePath: "./bom.json"
+
