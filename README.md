@@ -9,7 +9,17 @@ This orb is used to send an SBOM to your Manifest Cyber account.
 
 ---
 
-## 
+## How to use this orb
+
+This orb is meant to be used in conjunction with an SBOM generation tool such as CycloneDX. The orb will take the SBOM and send it to your Manifest Cyber account. Various generators are available for different languages and ecosystems. For more information on how to generate an SBOM, visit the [CycloneDX Github Org](https://github.com/CycloneDX/).
+
+1. Add the orb to your project.
+2. Generate an API Key in your Manifest Cyber account. This is done from the "Organizations" page, which you can reach by clicking on your account. 
+3. Save that API key in CircleCI as an environment variable. The name of the environment variable is `MANIFEST_API_KEY`.
+4. In the app build job, use your SBOM generator to build an SBOM and save it to a file. 
+5. In the app build job, call the `manifest-circle-orb/transmit` command. Pass the path to the SBOM as the `bomFilePath` parameter, and pass the api key as `apiKey`.
+
+
 
 ## Resources
 
