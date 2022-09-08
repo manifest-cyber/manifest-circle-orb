@@ -11,9 +11,6 @@ parameters:
     description: "The path to a valid bom file"
 steps:
   - run:
-      name: pip install
-      command: pip install requests
-  - run:
       shell: /usr/bin/python3
       environment:
         MANIFEST_API_KEY: <<parameters.apiKey>>
