@@ -10,8 +10,8 @@ parameters:
     type: string
     description: "The path to a valid bom file"
 steps:
-  - python/install-packages:
-      pkg-manager: pip
+  - run:
+      command: pip install requests
   - run:
       shell: /usr/bin/python3
       environment:
