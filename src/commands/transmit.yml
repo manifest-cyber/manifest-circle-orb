@@ -1,5 +1,5 @@
 description: >
-  This command transmits an SBOM to Manifest. 
+  This command transmits an SBOM to Manifest.
 # What will this command do?
 # Descriptions should be short, simple, and clear.
 parameters:
