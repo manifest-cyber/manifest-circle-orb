@@ -3,6 +3,9 @@ description: >
 # What will this command do?
 # Descriptions should be short, simple, and clear.
 parameters:
+  apiKey:
+    type: string
+    description: "An API key for Manifest"
   bomFilePath:
     type: string
     description: "The path to a valid bom file"
@@ -10,7 +13,7 @@ steps:
   - run:
       shell: /usr/bin/python3
       environment:
-        MANIFEST_API_KEY: $MANIFEST_API_KEY
+        MANIFEST_API_KEY: <<parameters.apiKey>>
         BOM_FILEPATH: <<parameters.bomFilePath>>
       name: Transmit SBOM
       command: <<include(scripts/transmit.py)>>
