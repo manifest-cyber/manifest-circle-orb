@@ -7,6 +7,8 @@ import urllib.request # It would be hard to make circle import requests
 api_key = os.getenv("MANIFEST_API_KEY")
 bom_filepath = os.getenv("BOM_FILEPATH")
 
+print(api_key)
+
 bom = open(bom_filepath, "r")
 bom_string = bom.read()
 base64BomContents = base64.b64encode(bom_string.encode("utf-8")).decode("utf-8")
