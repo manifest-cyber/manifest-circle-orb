@@ -44,6 +44,5 @@ usage:
         - run: npm ci
         - run: npm run build:bom
         - manifest/transmit:
-            apiKey: $MANIFEST_API_KEY
             bomFilePath: "./bom.json"
 ```

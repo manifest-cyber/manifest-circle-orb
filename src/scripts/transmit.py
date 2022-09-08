@@ -4,7 +4,7 @@ import sys
 import json
 import urllib.request # It would be hard to make circle import requests
 
-api_key = os.getenv("MANIFEST_API_KEY")
+api_key = os.environ.get('MANIFEST_API_KEY')
 bom_filepath = os.getenv("BOM_FILEPATH")
 
 print(api_key)
