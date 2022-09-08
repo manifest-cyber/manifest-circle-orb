@@ -7,7 +7,6 @@ import urllib.request # It would be hard to make circle import requests
 api_key = os.environ.get('MANIFEST_API_KEY')
 bom_filepath = os.getenv("BOM_FILEPATH")
 
-print(api_key)
 
 bom = open(bom_filepath, "r")
 bom_string = bom.read()
@@ -21,5 +20,4 @@ headers = {"Content-Type": "application/json"}
 req = urllib.request.Request(url = url, data = bytes(data.encode("utf-8")), method = "PUT", headers = headers)
 
 with urllib.request.urlopen(req) as resp:
-    response_data = json.loads(resp.read().decode("utf-8"))
-    print(response_data)
+    print(resp.status)
