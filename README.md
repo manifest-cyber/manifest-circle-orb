@@ -17,13 +17,13 @@ This orb is meant to be used in conjunction with an SBOM generation tool such as
 2. Generate an API Key in your Manifest Cyber account. This is done from the "Organizations" page, which you can reach by clicking on your account. 
 3. Save that API key in CircleCI as an environment variable. The name of the environment variable is `MANIFEST_API_KEY`.
 4. In the app build job, use your SBOM generator to build an SBOM and save it to a file. 
-5. In the app build job, call the `manifest-circle-orb/transmit` command. Pass the path to the SBOM as the `bomFilePath` parameter, and pass the api key as `apiKey`.
+5. In the app build job, call the `manifest/transmit` command. Pass the path to the SBOM as the `bomFilePath` parameter, and pass the api key as `apiKey`.
 
 
 
 ## Resources
 
-[CircleCI Orb Registry Page](https://circleci.com/orbs/registry/orb/manifest/manifest-circle-orb) - The official registry page of this orb for all versions, executors, commands, and jobs described.
+[CircleCI Orb Registry Page](https://circleci.com/orbs/registry/orb/manifest/sbom-transmitter) - The official registry page of this orb for all versions, executors, commands, and jobs described.
 
 [CircleCI Orb Docs](https://circleci.com/docs/2.0/orb-intro/#section=configuration) - Docs for using, creating, and publishing CircleCI Orbs.
 
@@ -33,7 +33,7 @@ This orb is meant to be used in conjunction with an SBOM generation tool such as
 usage:
   version: 2.1
   orbs:
-    manifest: manifest/manifest-circle-orb@x.y.z
+    manifest: manifest/sbom-transmitter@x.y.z
 
   jobs:
     build:
@@ -43,7 +43,7 @@ usage:
         - checkout
         - run: npm ci
         - run: npm run build:bom
-        - manifest-circle-orb/transmit:
+        - manifest/transmit:
             apiKey: $MANIFEST_API_KEY
             bomFilePath: "./bom.json"
 ```

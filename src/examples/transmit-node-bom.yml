@@ -4,7 +4,7 @@ description: >
 usage:
   version: 2.1
   orbs:
-    manifest: manifest/manifest-circle-orb@x.y.z
+    manifest: manifest/sbom-transmitter@x.y.z
 
   jobs:
     build:
@@ -14,7 +14,7 @@ usage:
         - checkout
         - run: npm ci
         - run: npm run build:bom
-        - manifest-circle-orb/transmit:
+        - manifest/transmit:
             apiKey: $MANIFEST_API_KEY
             bomFilePath: "./bom.json"
 

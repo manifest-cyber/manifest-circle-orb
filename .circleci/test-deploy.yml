@@ -1,6 +1,6 @@
 version: 2.1
 orbs:
-  manifest: manifest/manifest-circle-orb@dev:<<pipeline.git.revision>>
+  manifest: manifest/sbom-transmitter@dev:<<pipeline.git.revision>>
   orb-tools: circleci/orb-tools@11.1
 
 filters: &filters
@@ -28,7 +28,7 @@ workflows:
       - orb-tools/pack:
           filters: *filters
       - orb-tools/publish:
-          orb-name: manifest/manifest-circle-orb
+          orb-name: manifest/sbom-transmitter
           vcs-type: << pipeline.project.type >>
           pub-type: production
           requires:
