@@ -4,7 +4,7 @@ description: >
 usage:
   version: 2.1
   orbs:
-    manifest: manifest/sbom-transmitter@x.y.z
+    sbom-transmitter: manifest/sbom-transmitter@x.y.z
 
   jobs:
     build:
@@ -14,6 +14,6 @@ usage:
         - checkout
         - run: npm ci
         - run: npm run build:bom
-        - manifest/transmit:
+        - sbom-transmitter/transmit:
             bomFilePath: "./bom.json"
 
