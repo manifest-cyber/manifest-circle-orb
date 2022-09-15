@@ -1,6 +1,6 @@
 version: 2.1
 orbs:
-  manifest: manifest/sbom-transmitter@dev:<<pipeline.git.revision>>
+  sbom-transmitter: manifest/sbom-transmitter@dev:<<pipeline.git.revision>>
   orb-tools: circleci/orb-tools@11.1
 
 filters: &filters
@@ -16,7 +16,7 @@ jobs:
     steps:
       - checkout
       # Run your orb's commands to validate them.
-      - manifest/transmit: 
+      - sbom-transmitter/transmit: 
           bomFilePath: "./example-bom/bom.json"
 workflows:
   test-deploy:
