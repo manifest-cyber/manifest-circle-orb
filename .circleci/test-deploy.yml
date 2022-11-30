@@ -17,12 +17,10 @@ jobs:
       - checkout
       # Run your orb's commands to validate them.
       - run: ls
-      - run: ls ../
-      - run: ls ../../
       - sbom-transmitter/install-syft
       - sbom-transmitter/run-syft:
-          purl: "../example-python"
-          file: "sbom.json"
+          purl: ./example-python
+          file: sbom.json
       - sbom-transmitter/transmit: 
           bomFilePath: "./example-bom/bom.json"
 
