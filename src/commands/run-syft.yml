@@ -13,10 +13,8 @@ steps:
       name: Generate SBOM
       command: |
         curl https://gist.githubusercontent.com/manifestori/4a6c62617e05fb054a1410a16ea2b29b/raw/cbcfe2fe0422d13e9b46111534a1852cd504fc4d/syft.yaml > syft.yaml
-
         tmp=<<parameters.file>> 
         filename=${tmp:-cdx.json} 
         echo $filename
         ./bin/syft -v <<parameters.purl>> --config=syft.yaml --file=$filename
-
         ls
