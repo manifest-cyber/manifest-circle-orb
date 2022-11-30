@@ -13,7 +13,7 @@ bom_string = bom.read()
 base64BomContents = base64.b64encode(bom_string.encode("utf-8")).decode("utf-8")
 bom.close()
 
-data = json.dumps({"base64BomContents": base64BomContents, "source": "circle-ci-orb", "filename": bom_filepath, "relationship": "first"})
+data = json.dumps({"base64BomContents": base64BomContents, "source": "circle-ci", "filename": bom_filepath, "relationship": "first"})
 url = "https://api.manifestcyber.com/v1/sbom/upload"
 headers = {"Content-Type": "application/json", "Authorization": "Bearer " + api_key}
 
