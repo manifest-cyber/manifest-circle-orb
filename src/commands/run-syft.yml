@@ -1,0 +1,14 @@
+description: >
+  This command generate SBOM using Syft CLI
+parameters:
+  purl:
+    type: string
+    description: "purl to generate SBOM from"
+  file:
+    type: string
+    description: "file path to write SBOM to"
+steps:
+  - run:
+      shell: sh
+      name: Generate SBOM
+      command: <<include(scripts/transmit.py)>> <<parameters.purl>> <<parameters.file>>

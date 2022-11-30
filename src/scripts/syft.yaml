@@ -1,0 +1,56 @@
+output:
+  - cyclonedx-json
+quiet: false
+check-for-app-update: true
+anchore:
+  host: ""
+  path: ""
+  dockerfile: ""
+  overwrite-existing-image: false
+  import-timeout: 30
+dev:
+  profile-cpu: false
+  profile-mem: false
+log:
+  structured: false
+  level: ""
+  file: ""
+package:
+  cataloger:
+    enabled: true
+    scope: Squashed
+  search-unindexed-archives: true
+  search-indexed-archives: true
+  catalogers: []
+  cataloger-group: ""
+file-metadata:
+  cataloger:
+    enabled: true
+    scope: AllLayers
+  digests:
+  - sha1
+  - sha256
+file-classification:
+  cataloger:
+    enabled: true
+    scope: AllLayers
+file-contents:
+  cataloger:
+    enabled: true
+    scope: AllLayers
+  skip-files-above-size: 1048576
+  globs: ["**/**", ".DS_STORE"]
+secrets:
+  cataloger:
+    enabled: false
+    scope: AllLayers
+  additional-patterns: {}
+  exclude-pattern-names: []
+  reveal-values: false
+  skip-files-above-size: 1048576
+registry:
+  insecure-skip-tls-verify: false
+  insecure-use-http: false
+  auth: []
+exclude: []
+platform: ""

@@ -16,9 +16,13 @@ jobs:
     steps:
       - checkout
       # Run your orb's commands to validate them.
+      - sbom-transmitter/install-syft:
+      - sbom-transmitter/run-syft:
+          purl: "./example-python"
+          file: "sbom.json"
       - sbom-transmitter/transmit: 
           bomFilePath: "./example-bom/bom.json"
-      - sbom-transmitter/install-syft:
+
 workflows:
   test-deploy:
     jobs:
