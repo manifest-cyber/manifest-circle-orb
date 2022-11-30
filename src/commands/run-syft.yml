@@ -9,7 +9,7 @@ parameters:
     description: "file path to write SBOM to"
 steps:
   - run:
-      shell: sh
+      shell: bash
       name: Generate SBOM
       command: |
         filename="${<<parameters.file>>:-cdx.json}" \
