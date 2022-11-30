@@ -28,8 +28,8 @@ file-metadata:
     enabled: true
     scope: AllLayers
   digests:
-  - sha1
-  - sha256
+    - sha1
+    - sha256
 file-classification:
   cataloger:
     enabled: true
