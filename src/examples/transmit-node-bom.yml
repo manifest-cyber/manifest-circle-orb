@@ -20,4 +20,3 @@ usage:
             file: "./bom.json"
         - sbom-transmitter/transmit:
             bomFilePath: "./bom.json"
-
