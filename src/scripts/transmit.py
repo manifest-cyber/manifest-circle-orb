@@ -13,9 +13,9 @@ bom_string = bom.read()
 base64BomContents = base64.b64encode(bom_string.encode("utf-8")).decode("utf-8")
 bom.close()
 
-data = json.dumps({"base64BomContents": base64BomContents, "apiKey": api_key})
-url = "https://mvdryhw7l8.execute-api.us-east-1.amazonaws.com/prod/receive"
-headers = {"Content-Type": "application/json"}
+data = json.dumps({"base64BomContents": base64BomContents})
+url = "https://api.manifestcyber.com/v1/sbom/upload"
+headers = {"Content-Type": "application/json", "Authorization", "Bearer " + api_key}
 
 req = urllib.request.Request(url = url, data = bytes(data.encode("utf-8")), method = "PUT", headers = headers)
 
