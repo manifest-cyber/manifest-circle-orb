@@ -1,5 +1,5 @@
 #! /bin/bash
 
-curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -s -- -b ./bin
+sudo curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -s -- -b /usr/local/bin
 
-export PATH="./bin/:$PATH"
+export PATH="/usr/local/bin/:$PATH"
