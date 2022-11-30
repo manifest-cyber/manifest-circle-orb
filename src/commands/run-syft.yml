@@ -14,4 +14,4 @@ steps:
       command: |
         tmp=<<parameters.file>>
         filename=${tmp:-cdx.json} \
-        syft <<parameters.purl>>  --config=syft.yaml --file="$filename"
+        ./bin/syft <<parameters.purl>>  --config=syft.yaml --file="$filename"
