@@ -6,5 +6,4 @@ steps:
       environment:
         SYFT_VERSION: latest # TODO: change to static version
       name: Install Syft
-      command: curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -s -- -b /usr/local/bin \
-        export PATH="/usr/local/bin/:$PATH"
+      command: <<include(scripts/install-syft.sh)>>
