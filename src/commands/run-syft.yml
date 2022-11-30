@@ -11,4 +11,6 @@ steps:
   - run:
       shell: sh
       name: Generate SBOM
-      command: <<include(scripts/transmit.py)>> <<parameters.purl>> <<parameters.file>>
+      command: |
+        filename="${<<parameters.file>>:-cdx.json}" \
+        syft <<parameters.purl>>  --config=syft.yaml --file="$filename"
