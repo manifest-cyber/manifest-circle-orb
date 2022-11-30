@@ -12,5 +12,6 @@ steps:
       shell: bash
       name: Generate SBOM
       command: |
-        filename="${<<parameters.file>>:-cdx.json}" \
+        tmp=<<parameters.file>>
+        filename=${tmp:-cdx.json} \
         syft <<parameters.purl>>  --config=syft.yaml --file="$filename"
