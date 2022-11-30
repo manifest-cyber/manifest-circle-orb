@@ -14,7 +14,7 @@ usage:
         - checkout
         - run: npm ci
         - run: npm run build:bom
-        - sbom-transmitter/install-syft:
+        - run: sbom-transmitter/install-syft
         - sbom-transmitter/transmit:
             bomFilePath: "./bom.json"
 
