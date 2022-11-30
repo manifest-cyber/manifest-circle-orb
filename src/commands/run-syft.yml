@@ -17,3 +17,5 @@ steps:
         tmp=<<parameters.file>>
         filename=${tmp:-cdx.json} \
         ./bin/syft -v <<parameters.purl>> --config=syft.yaml --file="$filename"
+
+        ls
