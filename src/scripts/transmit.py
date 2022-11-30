@@ -15,7 +15,7 @@ bom.close()
 
 data = json.dumps({"base64BomContents": base64BomContents})
 url = "https://api.manifestcyber.com/v1/sbom/upload"
-headers = {"Content-Type": "application/json", "Authorization", "Bearer " + api_key}
+headers = {"Content-Type": "application/json", "Authorization": "Bearer " + api_key}
 
 req = urllib.request.Request(url = url, data = bytes(data.encode("utf-8")), method = "PUT", headers = headers)
 
