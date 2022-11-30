@@ -2,8 +2,8 @@ description: >
   This command installs syft executable
 steps:
   - run:
-      shell: sh
+      shell: bash
       environment:
-        SYFT_VERSION: latest # TODO: change to static version
+        # SYFT_VERSION: latest # TODO: change to static version
       name: Install Syft
       command: <<include(scripts/install-syft.sh)>>
