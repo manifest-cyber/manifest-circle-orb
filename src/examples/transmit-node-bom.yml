@@ -19,4 +19,4 @@ usage:
             purl: "./"
             file: "./bom.json"
         - sbom-transmitter/transmit:
-            bomFilePath: "./bom.json"
+            sbom-file-path: "./bom.json"

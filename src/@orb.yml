@@ -1,7 +1,7 @@
 version: 2.1
 
 description: >
-  This orb takes an SBOM and will transmit it to an organization's Manifest Cyber account.
+  This orb generates an SBOM and can transmit it to an organization's Manifest Cyber account.
 # What will your orb allow users to accomplish?
 # Descriptions should be short, simple, and informative.
 

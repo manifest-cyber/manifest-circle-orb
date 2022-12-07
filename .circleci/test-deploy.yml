@@ -21,9 +21,9 @@ jobs:
           purl: ./example-python
           file: sbom.json
       - sbom-transmitter/transmit: 
-          bomFilePath: sbom.json
+          sbom-file-path: sbom.json
       - sbom-transmitter/transmit: 
-          bomFilePath: "./example-bom/bom.json"
+          sbom-file-path: "./example-bom/bom.json"
 
 workflows:
   test-deploy:
