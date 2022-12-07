@@ -16,8 +16,12 @@ This orb is meant to be used in conjunction with an SBOM generation tool such as
 1. Add the orb to your project.
 2. Generate an API Key in your Manifest Cyber account. This is done from the "Organizations" page, which you can reach by clicking on your account. 
 3. Save that API key in CircleCI as an environment variable. The name of the environment variable is `MANIFEST_API_KEY`.
-4. In the app build job, use your SBOM generator to build an SBOM and save it to a file. 
-5. In the app build job, call the `sbom-transmitter/transmit` command. Pass the path to the SBOM as the `sbom-file-path` parameter.
+
+In the app build job, use your either use your SBOM generator to build an SBOM and save it to a file. 
+
+5. Call `sbom-transmitter/install-syft` to install `syft` SBOM generator in your CI.
+6. Call `sbom-transmitter/run-syft` to generate SBOM for your build.
+7. In the app build job, call the `sbom-transmitter/transmit` command. Pass the path to the SBOM as the `sbom-file-path` parameter.
 
 
 
@@ -42,7 +46,10 @@ usage:
       steps:
         - checkout
         - run: npm ci
-        - run: npm run build:bom
-        - manifest/transmit:
+        - run: sbom-transmitter/install-syft
+        - sbom-transmitter/run-syft:
+            purl: "./"
+            file: "./bom.json"
+        - sbom-transmitter/transmit:
             sbom-file-path: "./bom.json"
 ```

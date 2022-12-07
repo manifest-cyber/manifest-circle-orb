@@ -12,7 +12,6 @@ steps:
       shell: bash
       name: Generate SBOM
       command: |
-        ls
         tmp=<<parameters.file>>
         filename=${tmp:-cdx.json}
         echo $filename
