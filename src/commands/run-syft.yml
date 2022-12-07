@@ -11,7 +11,9 @@ steps:
   - run:
       shell: bash
       name: Generate SBOM
+      # TODO: use syft.yaml from public repository
       command: |
+        curl https://gist.githubusercontent.com/manifestori/4a6c62617e05fb054a1410a16ea2b29b/raw/cbcfe2fe0422d13e9b46111534a1852cd504fc4d/syft.yaml > syft.yaml
         tmp=<<parameters.file>>
         filename=${tmp:-cdx.json}
         echo $filename
