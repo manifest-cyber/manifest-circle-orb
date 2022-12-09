@@ -7,7 +7,7 @@ parameters:
   file:
     type: string
     description: "file path to write SBOM to"
-  name:
+  sbom-name:
     type: string
     description: "SBOM name"
 steps:
@@ -18,8 +18,8 @@ steps:
       command: |
         curl https://gist.githubusercontent.com/manifestori/4a6c62617e05fb054a1410a16ea2b29b/raw/cbcfe2fe0422d13e9b46111534a1852cd504fc4d/syft.yaml > syft.yaml
         tmp=<<parameters.file>>
-        tmpname=<<parameters.name>>
+        tmpname=<<parameters.sbom-name>>
         filename=${tmp:-cdx.json}
-        name=${tmp:-circle-ci-sbom}
+        sbomname=${tmp:-circle-ci-sbom}
         echo $filename
-        ./bin/syft -v <<parameters.purl>> --config=syft.yaml --file=$filename --name=$name
+        ./bin/syft -v <<parameters.purl>> --config=syft.yaml --file=$filename --name=$sbomname
