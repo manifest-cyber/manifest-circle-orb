@@ -10,6 +10,6 @@ steps:
   - run:
       shell: /usr/bin/python3
       environment:
-        BOM_FILEPATH: <<parameters.sbom-file-path>>
+        SBOM_FILEPATH: <<parameters.sbom-file-path>>
       name: Transmit SBOM
       command: <<include(scripts/transmit.py)>>
