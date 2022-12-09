@@ -20,7 +20,7 @@ jobs:
       - sbom-transmitter/run-syft:
           purl: ./example-python
           file: sbom.json
-          sbom-name demo-sbom-v1.0.0
+          sbom-name: demo-sbom-v1.0.0
       - sbom-transmitter/transmit: 
           sbom-file-path: sbom.json
       - sbom-transmitter/transmit: 
