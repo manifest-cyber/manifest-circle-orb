@@ -50,6 +50,7 @@ usage:
         - sbom-transmitter/run-syft:
             purl: "./"
             file: "./bom.json"
+            name: "demo-sbom"
         - sbom-transmitter/transmit:
             sbom-file-path: "./bom.json"
 ```
