@@ -24,7 +24,7 @@ steps:
   - run:
       shell: bash
       name: Generate SBOM
-      environment: 
+      environment:
         FILENAME: <<parameters.file>>
         SOURCE: <<parameters.source>>
         SBOM_OUTPUT: <<parameters.sbom-output>>
