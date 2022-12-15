@@ -24,6 +24,11 @@ steps:
   - run:
       shell: bash
       name: Generate SBOM
-      # TODO: use syft.yaml config from public repository
+      environment: 
+        FILENAME: <<parameters.file>>
+        SOURCE: <<parameters.source>>
+        SBOM_OUTPUT: <<parameters.sbom-output>>
+        SBOM_NAME: <<parameters.sbom-name>>
+        SBOM_VERSION: <<parameters.sbom-version>>
       command: <<include(scripts/update_sbom.sh)>>
 
