@@ -46,4 +46,7 @@ steps:
         fi
 
         ./bin/syft -v $source --config=syft.yaml --file=$filename
-        ./scripts/update_sbom.sh $name $version $output
+        
+        <<include(scripts/update_sbom.sh)>>
+
+        update_sbom $filename $name $version $output

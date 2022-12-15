@@ -43,25 +43,27 @@ function update_cyclonedx_sbom {
     echo "$input" >"$filepath"
 }
 
-if [ $# -ne 4 ]; then
-    echo "Usage: $0 <json file> <version> <name> <type: spdx-json | cyclonedx-json>"
-    exit 1
-fi
+function update_sbom {
+    if [ $# -ne 4 ]; then
+        echo "Usage: $0 <json file> <version> <name> <type: spdx-json | cyclonedx-json>"
+        exit 1
+    fi
 
-if [ ! -f "$1" ]; then
-    echo "Error: input file does not exist"
-    exit 1
-fi
+    if [ ! -f "$1" ]; then
+        echo "Error: input file does not exist"
+        exit 1
+    fi
 
-filepath=$1
-name=$2
-version=$3
-type=$4
+    local filepath=$1
+    local name=$2
+    local version=$3
+    local type=$4
 
-if [ "$type" == "spdx-json" ]; then
-    update_spdx_sbom "$filepath" "$name" "$version"
-elif [ "$type" == "cyclonedx-json" ]; then
-    update_cyclonedx_sbom "$filepath" "$name" "$version"
-else
-    echo "Error: invalid SBOM type"
-fi
+    if [ "$type" == "spdx-json" ]; then
+        update_spdx_sbom "$filepath" "$name" "$version"
+    elif [ "$type" == "cyclonedx-json" ]; then
+        update_cyclonedx_sbom "$filepath" "$name" "$version"
+    else
+        echo "Error: invalid SBOM type"
+    fi
+}
