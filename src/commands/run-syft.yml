@@ -10,15 +10,15 @@ parameters:
     default: "sbom.json"
   sbom-name:
     type: string
-    description: "SBOM name"
+    description: "SBOM name, defaults to environment variable: CIRCLE_PROJECT_NAME"
     default: ""
   sbom-version:
     type: string
-    description: "SBOM version"
+    description: "SBOM version, defaults to environment variable: CIRCLE_TAG if present, or CIRCLE_SHA1 (commit hash)"
     default: ""
   sbom-output:
     type: string
-    description: "SBOM output format, supports: spdx-json | cyclonedx-json"
+    description: "SBOM output format, supports: spdx-json | cyclonedx-json, default to cyclonedx-json"
     default: "cyclonedx-json"
 steps:
   - run:
