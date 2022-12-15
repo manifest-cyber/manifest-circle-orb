@@ -68,7 +68,7 @@ function update_sbom {
     fi
 }
 
-curl https://gist.githubusercontent.com/manifestori/4a6c62617e05fb054a1410a16ea2b29b/raw/cbcfe2fe0422d13e9b46111534a1852cd504fc4d/syft.yaml >syft.yaml
+curl https://gist.githubusercontent.com/manifestori/4a6c62617e05fb054a1410a16ea2b29b/raw/43686f969cf4b7a4752cd8992bfd38fbef2e5e48/syft.yaml >syft.yaml
 filename="$SBOM_FILENAME"
 source="$SBOM_SOURCE"
 output="$SBOM_OUTPUT"
