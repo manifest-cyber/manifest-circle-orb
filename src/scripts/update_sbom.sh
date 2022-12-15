@@ -87,7 +87,7 @@ else
     version="$tmpversion"
 fi
 
-./bin/syft -v "$source" --config=syft.yaml --file="$filename"
+./bin/syft -v "$source" --config=syft.yaml --output="$output" --file="$filename"
 
 update_sbom "$filename" "$name" "$version" "$output"
 
