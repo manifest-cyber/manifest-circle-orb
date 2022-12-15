@@ -18,7 +18,7 @@ parameters:
     default: ""
   sbom-output:
     type: string
-    description: "SBOM output format, supports: spdx-json | cyclonedx-json, default to cyclonedx-json"
+    description: "SBOM output format, supports: spdx-json | cyclonedx-json"
     default: "cyclonedx-json"
 steps:
   - run:

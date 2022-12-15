@@ -49,8 +49,10 @@ usage:
         - run: sbom-transmitter/install-syft
         - sbom-transmitter/run-syft:
             source: "./"
-            file: "./bom.json"
-            sbom-name: "demo-sbom"
+            file: "./sbom.json" # optional
+            sbom-name: "demo-sbom" # optional
+            sbom-version: "v1.0.0" # optional
+            sbom-output: "cyclonedx-json" # optional
         - sbom-transmitter/transmit:
-            sbom-file-path: "./bom.json"
+            sbom-file-path: "./sbom.json"
 ```
