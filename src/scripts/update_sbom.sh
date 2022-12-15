@@ -74,6 +74,8 @@ source="$SBOM_SOURCE"
 output="$SBOM_OUTPUT"
 tmpname="$SBOM_NAME"
 tmpversion="$SBOM_VERSION"
+currentdate=$(date "+%Y%m%d%H%M%S")
+shortsha=$(git rev-parse --short $CIRCLE_SHA1)
 
 if [ -z "$tmpname" ]; then
     name="$CIRCLE_PROJECT_REPONAME"
@@ -82,7 +84,7 @@ else
 fi
 
 if [ -z "$tmpversion" ]; then
-    version="${CIRCLE_TAG:-$CIRCLE_SHA1}"
+    version="${CIRCLE_TAG:-v0.0.0-$currentdate-$shortsha}"
 else
     version="$tmpversion"
 fi
