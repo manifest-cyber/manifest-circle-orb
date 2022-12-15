@@ -31,4 +31,3 @@ steps:
         SBOM_NAME: <<parameters.sbom-name>>
         SBOM_VERSION: <<parameters.sbom-version>>
       command: <<include(scripts/update_sbom.sh)>>
-
