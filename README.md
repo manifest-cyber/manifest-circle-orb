@@ -48,9 +48,9 @@ usage:
         - run: npm ci
         - run: sbom-transmitter/install-syft
         - sbom-transmitter/run-syft:
-            purl: "./"
+            source: "./"
             file: "./bom.json"
-            sbom-name "demo-sbom"
+            sbom-name: "demo-sbom"
         - sbom-transmitter/transmit:
             sbom-file-path: "./bom.json"
 ```

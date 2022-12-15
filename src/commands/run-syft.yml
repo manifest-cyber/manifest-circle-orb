@@ -1,25 +1,47 @@
 description: >
   This command generate SBOM using Syft CLI
 parameters:
-  purl:
+  source:
     type: string
-    description: "purl to generate SBOM from"
+    description: "source to generate SBOM from"
   file:
     type: string
     description: "file path to write SBOM to"
+    default: "sbom.json"
   sbom-name:
     type: string
     description: "SBOM name"
+  sbom-version:
+    type: string
+    description: "SBOM version"
+  sbom-output:
+    type: string
+    description: "SBOM output format, supports: spdx-json | cyclonedx-json"
+    default: "cyclonedx-json"
 steps:
   - run:
       shell: bash
       name: Generate SBOM
-      # TODO: use syft.yaml from public repository
+      # TODO: use syft.yaml config from public repository
       command: |
         curl https://gist.githubusercontent.com/manifestori/4a6c62617e05fb054a1410a16ea2b29b/raw/cbcfe2fe0422d13e9b46111534a1852cd504fc4d/syft.yaml > syft.yaml
-        tmp=<<parameters.file>>
+        filename=<<parameters.file>>
+        source=<<parameters.source>>
+        output=<<parameters.sbom-output>>
         tmpname=<<parameters.sbom-name>>
-        filename=${tmp:-cdx.json}
-        sbomname=${tmp:-circle-ci-sbom}
-        echo $filename
-        ./bin/syft -v <<parameters.purl>> --config=syft.yaml --file=$filename --name=$sbomname
+        tmpversion=<<parameters.sbom-version>>
+
+        if [ -z "$tmpname" ]; then
+          name=$CIRCLE_PROJECT_REPONAME
+        else
+          name=$tmpname
+        fi
+
+        if [ -z "$tmpversion" ]; then
+          version=${CIRCLE_TAG:-CIRCLE_SHA1}
+        else
+          version=$tmpversion
+        fi
+
+        ./bin/syft -v $source --config=syft.yaml --file=$filename
+        ./scripts/update_sbom.sh $name $version $output
