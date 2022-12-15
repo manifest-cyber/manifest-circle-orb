@@ -82,7 +82,7 @@ else
 fi
 
 if [ -z "$tmpversion" ]; then
-    version="${CIRCLE_TAG:-CIRCLE_SHA1}"
+    version="${CIRCLE_TAG:-$CIRCLE_SHA1}"
 else
     version="$tmpversion"
 fi
