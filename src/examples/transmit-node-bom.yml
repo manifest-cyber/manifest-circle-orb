@@ -21,5 +21,6 @@ usage:
             # NOTE: using default CIRCLE_CI values, uncomment for force:
             # sbom-name: "demo-sbom"
             # sbom-version: "1.0.0"
+            sbom-output: "cyclonedx-json"
         - sbom-transmitter/transmit:
             sbom-file-path: "./bom.json"
