@@ -67,3 +67,27 @@ function update_sbom {
         echo "Error: invalid SBOM type"
     fi
 }
+
+curl https://gist.githubusercontent.com/manifestori/4a6c62617e05fb054a1410a16ea2b29b/raw/cbcfe2fe0422d13e9b46111534a1852cd504fc4d/syft.yaml >syft.yaml
+filename=<<parameters.file>>
+source=<<parameters.source>>
+output=<<parameters.sbom-output>>
+tmpname=<<parameters.sbom-name>>
+tmpversion=<<parameters.sbom-version>>
+
+if [ -z "$tmpname" ]; then
+    name=$CIRCLE_PROJECT_REPONAME
+else
+    name=$tmpname
+fi
+
+if [ -z "$tmpversion" ]; then
+    version=${CIRCLE_TAG:-CIRCLE_SHA1}
+else
+    version=$tmpversion
+fi
+
+./bin/syft -v $source --config=syft.yaml --file=$filename
+
+update_sbom $filename $name $version $output
+
