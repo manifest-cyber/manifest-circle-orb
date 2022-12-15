@@ -11,9 +11,11 @@ parameters:
   sbom-name:
     type: string
     description: "SBOM name"
+    default: ""
   sbom-version:
     type: string
     description: "SBOM version"
+    default: ""
   sbom-output:
     type: string
     description: "SBOM output format, supports: spdx-json | cyclonedx-json"
