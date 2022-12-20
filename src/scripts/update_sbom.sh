@@ -8,11 +8,6 @@ function update_spdx_sbom {
     currentdate=$(date "+%Y%m%d%H%M%S")
     shortsha=$(git rev-parse --short "$CIRCLE_SHA1")
 
-
-    if [ "$GITHUB_REF_TYPE" = "tag" ]; then
-        gittag=$GITHUB_REF_NAME
-    fi
-
     if [ -z "$name" ]; then
         name="$CIRCLE_PROJECT_REPONAME"
     else
@@ -46,20 +41,17 @@ function update_cyclonedx_sbom {
     local tmpversion=$3
     local name=""
     local version=""
+    local existingName=""
+    local existingVersion=""
 
     currentdate=$(date "+%Y%m%d%H%M%S")
     shortsha=$(git rev-parse --short "$CIRCLE_SHA1")
 
-
-    if [ "$GITHUB_REF_TYPE" = "tag" ]; then
-        gittag=$GITHUB_REF_NAME
-    fi
-
     # Read the input file and parse the JSON
     input=$(cat "$filepath")
 
-    local existingName=$(echo "$input" | jq -r '.metadata.component.name')
-    local existingVersion=$(echo "$input" | jq -r '.metadata.component.version')
+    existingName=$(echo "$input" | jq -r '.metadata.component.name')
+    existingVersion=$(echo "$input" | jq -r '.metadata.component.version')
 
     if [ -z "$tmpname" ]; then
         name="$CIRCLE_PROJECT_REPONAME"
