@@ -10,14 +10,10 @@ function update_spdx_sbom {
 
     if [ -z "$name" ]; then
         name="$CIRCLE_PROJECT_REPONAME"
-    else
-        name="$name"
     fi
 
     if [ -z "$version" ]; then
         version="${CIRCLE_TAG:-v0.0.0-$currentdate-$shortsha}"
-    else
-        version="$version"
     fi
 
     if (! jq '.relationships[] | select(.relationshipType == "DESCRIBES")' "$filepath") >/dev/null 2>&1; then
@@ -66,7 +62,7 @@ function update_cyclonedx_sbom {
     fi
 
     json=$(echo "$input" | jq -r '.metadata.component')
-    if [ ! -z "$tmpname" ] || [ -d "$existingName" ] || [ "$existingName" == "null" ]; then
+    if [ -n "$tmpname" ] || [ -d "$existingName" ] || [ "$existingName" == "null" ]; then
 
         # Add the name to the "name" field
         json=$(echo "$json" | jq ".name = \"$name\"")
@@ -74,7 +70,7 @@ function update_cyclonedx_sbom {
         echo "using existing SBOM values for name: $existingName"
     fi
 
-    if [ ! -z "$tmpversion" ] || [ "$existingVersion" == "null" ]; then
+    if [ -n "$tmpversion" ] || [ "$existingVersion" == "null" ]; then
 
         # Add the version to the "version" field
         json=$(echo "$json" | jq ".version = \"$version\"")
