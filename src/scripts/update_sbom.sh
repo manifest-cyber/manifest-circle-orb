@@ -5,7 +5,26 @@ function update_spdx_sbom {
     local name=$2
     local version=$3
 
-    #
+    currentdate=$(date "+%Y%m%d%H%M%S")
+    shortsha=$(git rev-parse --short "$CIRCLE_SHA1")
+
+
+    if [ "$GITHUB_REF_TYPE" = "tag" ]; then
+        gittag=$GITHUB_REF_NAME
+    fi
+
+    if [ -z "$name" ]; then
+        name="$CIRCLE_PROJECT_REPONAME"
+    else
+        name="$name"
+    fi
+
+    if [ -z "$version" ]; then
+        version="${CIRCLE_TAG:-v0.0.0-$currentdate-$shortsha}"
+    else
+        version="$version"
+    fi
+
     if (! jq '.relationships[] | select(.relationshipType == "DESCRIBES")' "$filepath") >/dev/null 2>&1; then
         jq --arg name "$name-$version" \
             '.name = $name' \
@@ -23,18 +42,53 @@ function update_spdx_sbom {
 
 function update_cyclonedx_sbom {
     local filepath=$1
-    local name=$2
-    local version=$3
+    local tmpname=$2
+    local tmpversion=$3
+    local name=""
+    local version=""
+
+    currentdate=$(date "+%Y%m%d%H%M%S")
+    shortsha=$(git rev-parse --short "$CIRCLE_SHA1")
+
+
+    if [ "$GITHUB_REF_TYPE" = "tag" ]; then
+        gittag=$GITHUB_REF_NAME
+    fi
 
     # Read the input file and parse the JSON
     input=$(cat "$filepath")
+
+    local existingName=$(echo "$input" | jq -r '.metadata.component.name')
+    local existingVersion=$(echo "$input" | jq -r '.metadata.component.version')
+
+    if [ -z "$tmpname" ]; then
+        name="$CIRCLE_PROJECT_REPONAME"
+    else
+        name="$tmpname"
+    fi
+
+    if [ -z "$tmpversion" ]; then
+        version="${CIRCLE_TAG:-v0.0.0-$currentdate-$shortsha}"
+    else
+        version="$tmpversion"
+    fi
+
     json=$(echo "$input" | jq -r '.metadata.component')
+    if [ ! -z "$tmpname" ] || [ -d "$existingName" ] || [ "$existingName" == "null" ]; then
 
-    # Add the name to the "name" field
-    json=$(echo "$json" | jq ".name = \"$name\"")
+        # Add the name to the "name" field
+        json=$(echo "$json" | jq ".name = \"$name\"")
+    else
+        echo "using existing SBOM values for name: $existingName"
+    fi
 
-    # Add the version to the "version" field
-    json=$(echo "$json" | jq ".version = \"$version\"")
+    if [ ! -z "$tmpversion" ] || [ "$existingVersion" == "null" ]; then
+
+        # Add the version to the "version" field
+        json=$(echo "$json" | jq ".version = \"$version\"")
+    else
+        echo "using existing SBOM values for version: $existingVersion"
+    fi
 
     # Update the input JSON with the updated version
     input=$(echo "$input" | jq '.metadata.component = $json' --argjson json "$json")
@@ -72,22 +126,8 @@ curl https://gist.githubusercontent.com/manifestori/4a6c62617e05fb054a1410a16ea2
 filename="$SBOM_FILENAME"
 source="$SBOM_SOURCE"
 output="$SBOM_OUTPUT"
-tmpname="$SBOM_NAME"
-tmpversion="$SBOM_VERSION"
-currentdate=$(date "+%Y%m%d%H%M%S")
-shortsha=$(git rev-parse --short "$CIRCLE_SHA1")
-
-if [ -z "$tmpname" ]; then
-    name="$CIRCLE_PROJECT_REPONAME"
-else
-    name="$tmpname"
-fi
-
-if [ -z "$tmpversion" ]; then
-    version="${CIRCLE_TAG:-v0.0.0-$currentdate-$shortsha}"
-else
-    version="$tmpversion"
-fi
+name="$SBOM_NAME"
+version="$SBOM_VERSION"
 
 ./bin/syft -v "$source" --config=syft.yaml --output="$output" --file="$filename"
 
