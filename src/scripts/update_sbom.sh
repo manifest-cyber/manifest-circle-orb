@@ -16,7 +16,7 @@ function update_spdx_sbom {
         version="${CIRCLE_TAG:-v0.0.0-$currentdate-$shortsha}"
     fi
 
-    if (! jq '.relationships[] | select(.relationshipType == "DESCRIBES")' "$filepath") >/dev/null 2>&1; then
+    if (! jq '.relationships[] | select(.relationshipType == "DESCRIBES" && .relatedSpdxElement != "SPDXRef-DOCUMENT")' "$filepath") >/dev/null 2>&1; then
         jq --arg name "$name-$version" \
             '.name = $name' \
             "$filepath" >"$filepath".tmp && mv "$filepath".tmp "$filepath"
