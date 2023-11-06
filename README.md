@@ -5,7 +5,9 @@
 
 --->
 
-This orb is used to send an SBOM to your Manifest Cyber account.
+> Note: This is a legacy version of our Orb and is considered deprecated. This is still available for use (for now), but we recommend using our [updated Orb here](https://circleci.com/developer/orbs/orb/manifest/sbom). You do not need to be a Manifest customer to use our Orb for generating SBOMs, but if you'd like to learn more about Manifest, you can find us at [manifestcyber.com](https://manifestcyber.com).
+
+This Orb is used to generate an SBOM and optionally publish to your Manifest account. This Orb uses the Manifest CLI, which wraps various SBOM generators, supports multiple formats, and provides a common interface for generating SBOMs. The Manifest CLI performs further cleanup on generated SBOMs (such as healing relationships & componentIds, asset names & versions, etc), and can also optionally publish your SBOM directly into your Manifest tenant.
 
 ---
 
